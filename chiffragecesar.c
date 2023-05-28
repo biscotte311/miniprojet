@@ -6,16 +6,16 @@
 char * chiffrement_cesar(char* message, int cle) {
 	// initialisation de la longueur du message
     int longueur = strlen(message);
-	// initialisation du compteut
+	// initialisation du compteur i
     int i;
-	// parcour du message
+	// parcours du message
     for (i = 0; i < longueur; i++) {
-		// condition dans le cas où le caractères est bien écrivable
+		// condition dans le cas où le caractère est bien imprimable
         if (message[i] >=' ' && message[i]<= '~' ){
-			// modification du caractères
+			// modification du caractère
             message[i] = ((message[i] - ' ' + cle) % 95) + ' ';
         }
     }
-	// renvoi du message chiffrer
+	// retour du message chiffré
     return message;
 }

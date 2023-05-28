@@ -10,13 +10,13 @@ char * cryptageDecriptage(int i, char * texte);
 verification v;
 
 void main(){
-	// initialisation du point de reprise pour le premier choix de l'utilisateur
+	// initialisation du point de reprise pour le premier choix de l utilisateur
     jmp_buf ptRep;
 	// initialisation du point de reprise dans le cas d'une erreur
     jmp_buf ptRep1;
-    // variable qui sauvegard le choix de l utilisateur
+    // variable qui sauvegarde le choix de l'utilisateur
     char x;
-    // varible de suppression des valeurs saisie en trop par l utilisateur
+    // varible de suppression des valeurs saisies en trop par l utilisateur
     char c;
     // variable qui contient le texte de l utilisateur
     char * texte;
@@ -26,26 +26,26 @@ void main(){
     printf("Bienvenue dans le logiciel de cryptage de texte\n");
     // nous allons dans un premier temps recuperer le texte de l'utilisateur via la fonction "recuperationDuTexte"
     texte = recuperationDuTexte();
-	// vérification que le message ne contient pas de caractère non écrivable via la fonction "verifier"
+	// vérification que le message ne contient pas de caractère non imprimable via la fonction "verifier"
     v=verifier(texte);
-	// condition por vérifier qu'il n'y a pas d'erreur
+	// condition pour vérifier qu'il n'y a pas d'erreurs
     if(v.isVerified==false){
-		// nouveauTexte prend la valeur du texte entrer par l'utilisateur
+		// nouveauTexte prend la valeur du texte entré par l'utilisateur
         nouveauTexte=texte;
-		// saut du code jusqu'à la fin pour afficher résultat avec erreur
+		// saut du code jusqu'à la fin pour afficher le résultat avec erreur
         longjmp(ptRep1,1);
     }
-    // positionnement du point de reprise dans le cas ou la valeur rentrer est fausse pour la selection de cryptage ou decryptage
+    // positionnement du point de reprise dans le cas ou la valeur rentré est fausse pour la selection de cryptage ou de decryptage
     setjmp(ptRep);
     
-    //affiche de l'option de cryptage ou decryptage du texte
+    //affichage de l'option de cryptage ou de decryptage du texte
     printf("Veuillez choisir le mode : \n");
     printf("    - 1 crypter \n");
     printf("    - 2 decrypter \n");
     // recuperation de la premiere valeur
     x = getchar();
     c = getchar();
-    //suppretion de toutes les valeurs qui suivent
+    //suppression de toutes les valeurs qui suivent
     while (c != '\n'){
         c= getchar();
     }
@@ -62,27 +62,27 @@ void main(){
 			// appelle de la fonction cryptageDecriptage avec la valeur 10 pour le décryptage
             nouveauTexte = cryptageDecriptage(1,texte);
             break;
-        // dans le cas ou l utilisateur a rentrer une valeur erroner
+        // dans le cas ou l utilisateur a rentré une valeur erroné
         default:
-            // saut au point de reprise quand la valeur est fausse plus affiche d un message d erreur
+            // saut au point de reprise quand la valeur est fausse plus affichage d un message d erreur
             printf("La valeur rentrer ne correspond pas veuillez retenter\n\n");
             longjmp(ptRep, 1);
             break;
     }
-	// positionnement du pointeur de reprise dans le cas où une erreur à était rencontrer
+	// positionnement du pointeur de reprise dans le cas où une erreur a été rencontrée
     setjmp(ptRep1);
 	// envoie des informations à la fonction d'affichage
     affichage(v, nouveauTexte);
-    // libération de la mémoir que le texte à pris
+    // libération de la mémoire occupée par le texte
     free(texte);
 
 }
 
-// Fonction qui celon le choix de l'utilisateur décrypte ou crypte le message
+// Fonction qui selon le choix de l'utilisateur décrypte ou crypte le message
 char * cryptageDecriptage(int i, char * texte){    
 	// initialisation du point de reprise pour le premier choix de l'utilisateur
     jmp_buf ptRep;
-	// initialisation du point de reprise pour dans le cas où il a rentrer une clé erroner pour le chiffrement_cesar
+	// initialisation du point de reprise pour dans le cas où il a rentré une clé erronée pour le chiffrement_cesar
     jmp_buf ptRep1;
 	// initialisation de la variable qui enregistrera les caractere de type entier pour la clé  de cesar
     char entier;
@@ -98,11 +98,11 @@ char * cryptageDecriptage(int i, char * texte){
     int clefi;
 	// initialisation de la variable y qui récupérera le choix de l'uilisateur
     char y;
-	// initialisation de la variable qui supprimera toutes valeurs superflue lors de la saisie du choix
+	// initialisation de la variable qui supprimera toutes valeurs superflues lors de la saisie du choix
     char c;
-	// variable qui contiendra le message modifier
+	// variable qui contiendra le message modifié
     char * nouveauTexte;
-    //positionnement du point de reprise dans le cas ou la valleur rentrer est fausse pour la selection du mode de cryptage
+    //positionnement du point de reprise dans le cas ou la valeur rentrée est fausse pour la selection du mode de cryptage
     setjmp(ptRep);
     printf("Veuillez choisir le type de cryptage : \n");
     printf("    - 1 César \n");
@@ -111,7 +111,7 @@ char * cryptageDecriptage(int i, char * texte){
     y= getchar();
 	// suppression des autres valeurs
     c= getchar();
-    //suppretion de toutes les valeurs qui suivent
+    //suppression de toutes les valeurs qui suivent
     while (c != '\n'){
         c= getchar();
     }
@@ -121,22 +121,22 @@ char * cryptageDecriptage(int i, char * texte){
     switch(y){
 		// choix de cesar
         case '1': 
-			// positionnement du pointeur dans le cas où la clef cesar est erroner
+			// positionnement du pointeur dans le cas où la clef cesar est erronée
             setjmp(ptRep1);
             printf("Entrer la valeur de la clef : \n");
-			// récupérera de la clef
+			// récupération de la clef
             entier = getchar();
 			
             conter=0;
             while(entier!='\n'){
 				// dans le cas où il y a dépassement de la taille de la variable clefc
                 if (conter == tailleInitial){
-					// réalocation de mémoir pour la varible clefc
+					// réalocation de mémoire pour la varible clefc
                     clefc= (char *)realloc(clefc,(tailleInitial+100)*sizeof(char));
                     tailleInitial+=100;
 					
                 }
-				// ajoue de l'entier
+				// ajout de l'entier
                 clefc[conter]=entier;
                 conter++;
                 entier=getchar();
@@ -146,16 +146,16 @@ char * cryptageDecriptage(int i, char * texte){
 			// dans le cas où il y a une erreur
             if(clefi==NULL){
                 printf("La valeur de la clef est erroner\n");
-				// saut au point de reprise pour que l'uilisateur entre uen clef valable
+				// saut au point de reprise pour que l'uilisateur entre une clef valable
                 longjmp(ptRep1,1);
             }
 
-			// rappelle du choix de l'uilisateur pour le chiffrage ou le déchiffrage
+			// rappel du choix de l'uilisateur pour le chiffrage ou le déchiffrage
             if (i==0){                
-				// appelle de la fonction de chiffrement de cesar
+				// appel de la fonction de chiffrement de cesar
                 nouveauTexte=chiffrement_cesar(texte,clefi);
             } else{
-				// appelle de la fonction de dechiffrement de cesar
+				// appel de la fonction de dechiffrement de cesar
                 nouveauTexte=dechiffrement_cesar(texte, clefi);
             }
             break;
@@ -163,11 +163,11 @@ char * cryptageDecriptage(int i, char * texte){
         case '2':
 			
             printf("Entrer la valeur de la clef : \n");
-			// récupéreration de ma clef de chiffrement pur vigenaire
+			// récupéreration de la clef de chiffrement pur vigenaire
             caractere = getchar();
             conter=0;
             while(caractere != '\n'){
-				// dans le cas où la taille de la variable clefc n'est pas assez grand on réaloue de la place mémoir
+				// dans le cas où la taille de la variable clefc n'est pas assez grand on réaloue de la place en mémoire
                 if (conter == tailleInitial){
                     clefc= (char *)realloc(clefc,(tailleInitial+100)*sizeof(char));
                     tailleInitial+=100;
@@ -177,12 +177,12 @@ char * cryptageDecriptage(int i, char * texte){
                 conter++;
                 caractere=getchar();
             }
-			// rappelle du choix de l'uilisateur
+			// rappel du choix de l'uilisateur
             if (i==0){
-				// appelle de fonction de chiffrement de vigenaire
+				// appel de fonction de chiffrement de vigenaire
                 nouveauTexte=chiffrement_vigenere(texte,clefc);
             } else{
-				// appelle de la fonction de déchiffrement de vigenaire
+				// appel de la fonction de déchiffrement de vigenaire
                 nouveauTexte=dechiffrement_vigenere(texte,clefc);
             }
             break;
@@ -192,27 +192,27 @@ char * cryptageDecriptage(int i, char * texte){
             longjmp(ptRep, 1);
             break;
     }
-	// renvoie du texte modifier
+	// renvoie du texte modifié
     return nouveauTexte;
 }
 
 char * recuperationDuTexte(){
-	// initialisation des compteur
+	// initialisation des compteurs
     int i=0;
     int j=0;
-	// initialisation des variable de récupérera des caractères 
+	// initialisation des variables de récupérations des caractères 
     char x;
     char c;
     // initialisation de la variable fic qui contiendra un potentiel fichier
     FILE* fic;
-	// initialisation des taille des varaible texte
+	// initialisation des taille des varaibles texte
     int tailleInitial= 100; 
     int tailleInitial1= 100;  
 	// initialisation de la variable texte 
     char *texte = malloc(tailleInitial* sizeof(char));
-	// initialisation de la varaible lien qui contiendra le lien vers un fichier
+	// initialisation de la variable lien qui contiendra le lien vers un fichier
     char *lien=malloc(tailleInitial1* sizeof(char));
-	// initialisation du point de reprise dans le cas où le lien est erroner
+	// initialisation du point de reprise dans le cas où le lien est erroné
 	jmp_buf ptRep1;
 	// initialisation du point de reprise
     jmp_buf ptRep;
@@ -223,7 +223,7 @@ char * recuperationDuTexte(){
     printf("    - 1 entrer le texte à la main\n");
     printf("    - 2 depuis un fichier texte\n");
 	
-	// récupération du choix et suppression des valeur de trop
+	// récupération du choix et suppression des valeurs en trop
     x = getchar();
     c = getchar();
 
@@ -239,17 +239,17 @@ char * recuperationDuTexte(){
             c=getchar();
             i=0;
             while(c!='\n'){
-				// dans le cas où le message dépassement ça taille réalocation de mémoir
+				// dans le cas où le message dépasse sa taille, réalocation de mémoire
                 if (i == tailleInitial){
                     texte= (char *)realloc(texte,(tailleInitial+100)*sizeof(char));
                     tailleInitial+=100;
                 }
-				// ajoue du caractere
+				// ajout du caractere
                 texte[i]= c;
                 i++;
                 c=getchar();
             }  
-			// dans le cas où le message dépassement ça taille réalocation de mémoir pour rajouter le caractere de fin '\0'
+			// dans le cas où le message dépasse sa taille réalocation de mémoire pour rajouter le caractere de fin '\0'
             if (i == tailleInitial){
                     texte= (char *)realloc(texte,(tailleInitial+100)*sizeof(char));
                     tailleInitial+=100;
@@ -264,7 +264,7 @@ char * recuperationDuTexte(){
             c=getchar();
             i=0;
             while(c!='\n'){
-				// dans le cas où le message dépassement ça taille, réalocation de mémoir
+				// dans le cas où le message dépasse sa taille, réalocation de mémoire
                 if (i == tailleInitial1){
                     lien= (char *)realloc(lien, (tailleInitial1+100)*sizeof(char));
                     tailleInitial1+=100;
@@ -273,19 +273,19 @@ char * recuperationDuTexte(){
                 i++;
                 c=getchar();
             }  
-			// ouverture du fichier choisi 
+			// ouverture du fichier choisit
             fic= fopen(lien, "r");
 			// cas si le fichier n'existe pas
             if (fic == NULL){
                 printf("Erreur a l ouverture du fichier texte\n");
-				// saut vers le point de reprise pour que l'uilisateur retante un nouveau lien
+				// saut vers le point de reprise pour que l'uilisateur indique un nouveau lien
 				longjmp(ptRep1,1);
             } else {
-				// initialisation de la varaible qui contiendra les ligne du fichier
+				// initialisation de la varaible qui contiendra les lignes du fichier
                 char* ligne =NULL;
 				// initialisation de la taille de la ligne
                 size_t taille =0;
-				// réalocation de la premier ligne
+				// réalocation de la premiere ligne
                 getline(&ligne, &taille, fic);
 				// compteur de la longueur du texte
                 i=0;
@@ -297,7 +297,7 @@ char * recuperationDuTexte(){
                     c=ligne[j];
 
                     while(c!='\n'){
-						// dans le cas où le message dépassement ça taille réalocation de mémoir
+						// dans le cas où le message dépasse sa taille, réalocation de mémoire
                         if (i == tailleInitial){
                             texte= (char *)realloc(texte,(tailleInitial+100)*sizeof(char));
                             tailleInitial+=100;
@@ -307,7 +307,7 @@ char * recuperationDuTexte(){
                         j++;
                         c=ligne[j];
                     } 
-					// dans le cas où le message dépassement ça taille réalocation de mémoir pour le rajoue du caractere '/n'
+					// dans le cas où le message dépassem sa taille réalocation de mémoire pour l'ajout du caractere '/n'
                     if (i == tailleInitial){
                             texte= (char *)realloc(texte,(tailleInitial+1)*sizeof(char));
                             tailleInitial+=1;
@@ -319,7 +319,7 @@ char * recuperationDuTexte(){
                 }
 				// fermeture du fichier
                 fclose(fic);
-				// dans le cas où le message dépassement ça taille réalocation de mémoir pour l'ajoue du caractère de fin '\0'
+				// dans le cas où le message dépasse sa taille, réalocation de mémoire pour l'ajout du caractère de fin '\0'
                 if (i == tailleInitial){
                                 texte= (char *)realloc(texte,(tailleInitial+1)*sizeof(char));
                                 tailleInitial+=1;
@@ -328,11 +328,11 @@ char * recuperationDuTexte(){
             }
             break;
         default:
-			// dans le cas où l'utilisateur à rentrer une valeur erroner
+			// dans le cas où l'utilisateur a rentré une valeur erronée
             printf("La valeur rentrer ne correspond pas veuillez retenter\n\n");
             longjmp(ptRep, 1);
             break;
     }
-	// renvoie du texte 
+	// retour du texte 
     return texte;
 }

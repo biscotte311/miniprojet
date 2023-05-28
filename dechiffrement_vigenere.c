@@ -8,7 +8,7 @@ char* dechiffrement_vigenere(char* message, char* cle) {
 	int longueurMessage = strlen(message);
 	// initialisation de la longueur de la clé
 	int longueurCle = strlen(cle);
-	// initialisation de la variable qui contiendra le message déchiffrer
+	// initialisation de la variable qui contiendra le message déchiffré
 	char* messageDechiffre = (char*) malloc((longueurMessage + 1) * sizeof(char));
 	// parcour de message à déchiffrer
 	for (int i = 0, j = 0; i < longueurMessage; i++, j++) {
@@ -21,11 +21,11 @@ char* dechiffrement_vigenere(char* message, char* cle) {
 		// récupération d'un caractère de la clé
         int caractereCle = cle[j];
 		
-		// vérification que le caractère du message est bien écrivable
+		// vérification que le caractère du message est bien imprimable
         if (caractereMessage >=' ' && caractereMessage <= '~' ){
 			// modification du caractère
         	int caractereDechiffre = (((caractereMessage - ' ') - (caractereCle -' ')) % 95) +' ';
-			// dans le cas où le caractère n'est plus écrivable on rajoute 95 dans la position de la table ascii
+			// dans le cas où le caractère n'est plus imprimable on rajoute 95 dans la position de la table ascii
         	if (caractereDechiffre < ' '){
                 caractereDechiffre = caractereDechiffre + 95;
         	}
@@ -33,7 +33,7 @@ char* dechiffrement_vigenere(char* message, char* cle) {
         	messageDechiffre[i] = caractereDechiffre;
         }
     }
-	// renvoi du message déchiffrer
+	// retour du message déchiffré
     return messageDechiffre;
 }
 

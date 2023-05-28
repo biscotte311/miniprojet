@@ -3,7 +3,7 @@ typedef struct {
     char c;
     bool isVerified;
 } verification ;
-// signature des différentes fonctions à utiliser dans le main
+// signatures des différentes fonctions à utiliser dans le main
 char * dechiffrement_cesar(char* message, int cle);
 char * chiffrement_cesar(char* message, int cle);
 char* chiffrement_vigenere(char* message, char* cle);
